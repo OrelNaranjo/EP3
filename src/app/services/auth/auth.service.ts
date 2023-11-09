@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, authState } from '@angular/fire/auth';
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence, browserLocalPersistence } from "firebase/auth";
 import { Router } from '@angular/router';
-import { Credentials } from 'src/app/interfaces/auth/credentials';
+import { IUser } from 'src/app/interfaces/auth/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth, private router: Router) { }
+  constructor(private router: Router) {  }
 
-  async login(credentials: Credentials) {
+  async login(user: IUser) {
+    const auth = getAuth();
     try {
-      await signInWithEmailAndPassword(this.auth, credentials.email, credentials.password);
+      await setPersistence(auth, user.rememberMe ? browserLocalPersistence: browserSessionPersistence );
+      await signInWithEmailAndPassword(auth, user.email, user.password);
+      this.getCurrentUserData(user.email);
       this.router.navigateByUrl('home');
     } catch (error) {
       console.log(error);
@@ -22,11 +25,15 @@ export class AuthService {
 
   async logout() {
     try {
-      await this.auth.signOut();
-      this.router.navigateByUrl('');
+      await getAuth().signOut();
+      this.router.navigateByUrl('login');
     } catch (error) {
       console.log(error);
       throw error;
     }
+  }
+  
+  getCurrentUserData(email: string) {
+
   }
 }

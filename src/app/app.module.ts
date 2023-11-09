@@ -11,10 +11,12 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ComponentsModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
