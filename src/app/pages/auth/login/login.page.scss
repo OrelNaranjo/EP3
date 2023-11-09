@@ -1,0 +1,26 @@
+ion-avatar{
+    margin: 0 auto;
+    width: 10rem;
+    height: auto;
+    margin-top: 1em;
+}
+ion-button{
+    margin: 0 auto;
+    margin-top: 3em;
+}
+
+ion-input{
+    margin-top: 2em;
+}
+
+ion-checkbox{
+    margin-top: 2em;
+}
+
+ion-content {
+    --background: linear-gradient(to bottom, #14375c, #236ea3);
+    --color: #fff;
+  }
+.my-toast .toast-wrapper {
+    background: orange;
+}
