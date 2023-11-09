@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    proyectId: "ionic-96ee0",
+    projectId: "ionic-96ee0",
     appId: "1:284048186803:web:9b58a25834c81f908dffc6",
     databaseURL: "https://ionic-96ee0-default-rtdb.firebaseio.com",
     storageBucket: "ionic-96ee0.appspot.com",

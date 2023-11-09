@@ -1,22 +1,22 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <form (ngSubmit)="login()" #loginForm="ngForm">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" [(ngModel)]="credentials.email" name="email" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="credentials.password" name="password" required></ion-input>
-    </ion-item>
-    <ion-buttons (click)="forgotPassword()">
-      <ion-label>Recuperar contraseña?</ion-label>
-    </ion-buttons>
-    <ion-button type="submit" [disabled]="!loginForm.form.valid">Login</ion-button>
+<ion-content class="ion-padding main-login">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <ion-avatar>
+      <img src="assets/logo.jpg" alt="logo">
+    </ion-avatar>
+    <h2 class="ion-text-center">INICIAR SESIÓN</h2>
+    <ion-input class="ion-margin-top" label="Correo Electrónico" label-placement="floating" fill="outline" placeholder="Ingrese su correo" shape="round" type="email" formControlName="email"></ion-input>
+    <ion-note *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" color="danger">Ingrese un correo electrónico válido.</ion-note>
+    <ion-input class="ion-margin-top" label="Contraseña" label-placement="floating" fill="outline" placeholder="Ingrese su contraseña" shape="round" type="password" formControlName="password"></ion-input>
+    <ion-note *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" color="danger">Debe tener al menos 6 caracteres.</ion-note>
+    <div class="ion-text-right ion-margin-bottom">
+      <ion-checkbox label-placement="start" formControlName="rememberMe">Mantener sesión iniciada</ion-checkbox>
+    </div>
+    <div class="ion-text-right">
+      <ion-label (click)="forgotPassword()">Olvido su contraseña?</ion-label>
+    </div>
+    <ion-button type="submit" expand="block" size="large" shape="round" [disabled]="!loginForm.valid">
+      INGRESAR
+      <ion-icon name="arrow-forward" slot="end"></ion-icon>
+    </ion-button>
   </form>
 </ion-content>
